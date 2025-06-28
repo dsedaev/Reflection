@@ -158,4 +158,4 @@ This project is for personal use. All data belongs to the user and stays private
 
 ---
 
-**Note**: The entire web application interface is designed in Russian language for Russian-speaking users, while this documentation is provided in English for broader accessibility. 
+**Note**: The entire web application interface is designed in Russian language, while this documentation is provided in English for broader accessibility. 
