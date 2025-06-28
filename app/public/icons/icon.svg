@@ -1,0 +1,24 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <rect width="256" height="256" rx="32" fill="#7a9a85"/>
+  
+  <!-- Книга/дневник -->
+  <rect x="48" y="64" width="160" height="128" rx="8" fill="#ffffff" stroke="#62806b" stroke-width="2"/>
+  
+  <!-- Переплет -->
+  <rect x="48" y="64" width="20" height="128" rx="8" fill="#62806b"/>
+  
+  <!-- Линии страниц -->
+  <line x1="88" y1="96" x2="184" y2="96" stroke="#e5e5e5" stroke-width="2"/>
+  <line x1="88" y1="112" x2="184" y2="112" stroke="#e5e5e5" stroke-width="2"/>
+  <line x1="88" y1="128" x2="184" y2="128" stroke="#e5e5e5" stroke-width="2"/>
+  <line x1="88" y1="144" x2="160" y2="144" stroke="#e5e5e5" stroke-width="2"/>
+  
+  <!-- Закладка -->
+  <rect x="56" y="48" width="8" height="32" fill="#ec8044"/>
+  
+  <!-- Сердце (символ самопознания) -->
+  <path d="M128 176c-8-8-16-16-16-24 0-8 8-16 16-16s16 8 16 16c0 8-8 16-16 24z" fill="#ec8044"/>
+  <circle cx="120" cy="152" r="6" fill="#ec8044"/>
+  <circle cx="136" cy="152" r="6" fill="#ec8044"/>
+</svg> 

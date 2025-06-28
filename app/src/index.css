@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #7a9a85;
+  --color-primary-light: #9cb8a5;
+  --color-primary-dark: #62806b;
+  --color-accent: #ec8044;
+  --color-accent-light: #f1a06a;
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-text: #171717;
+  --color-text-secondary: #525252;
+  --color-border: #e5e5e5;
+}
+
+.dark {
+  --color-primary: #9cb8a5;
+  --color-primary-light: #c1d4c7;
+  --color-primary-dark: #7a9a85;
+  --color-accent: #f1a06a;
+  --color-accent-light: #f6c498;
+  --color-background: #0a0a0a;
+  --color-surface: #171717;
+  --color-text: #fafafa;
+  --color-text-secondary: #a3a3a3;
+  --color-border: #262626;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  .dark body {
+    @apply bg-neutral-900 text-neutral-50;
+  }
+}
+
+@layer components {
+  /* Компактные размеры */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700;
+  }
+
+  .btn-secondary {
+    @apply btn border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50;
+  }
+
+  .btn-ghost {
+    @apply btn text-neutral-700 hover:bg-neutral-100;
+  }
+
+  .dark .btn-secondary {
+    @apply border-neutral-700 bg-neutral-800 text-neutral-100 hover:bg-neutral-700;
+  }
+
+  .dark .btn-ghost {
+    @apply text-neutral-300 hover:bg-neutral-800;
+  }
+
+  .input {
+    @apply flex h-9 w-full rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .dark .input {
+    @apply border-neutral-700 bg-neutral-800 text-neutral-100 ring-offset-neutral-900 placeholder:text-neutral-400;
+  }
+
+  .textarea {
+    @apply flex min-h-[100px] w-full rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-sm ring-offset-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .dark .textarea {
+    @apply border-neutral-700 bg-neutral-800 text-neutral-100 ring-offset-neutral-900 placeholder:text-neutral-400;
+  }
+
+  .card {
+    @apply rounded-lg border border-neutral-200 bg-white p-4 shadow;
+  }
+
+  .dark .card {
+    @apply border-neutral-800 bg-neutral-900;
+  }
+
+  .mood-happy {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+
+  .mood-sad {
+    @apply bg-blue-100 text-blue-800 border-blue-200;
+  }
+
+  .mood-neutral {
+    @apply bg-gray-100 text-gray-800 border-gray-200;
+  }
+
+  .mood-excited {
+    @apply bg-orange-100 text-orange-800 border-orange-200;
+  }
+
+  .mood-anxious {
+    @apply bg-purple-100 text-purple-800 border-purple-200;
+  }
+
+  .dark .mood-happy {
+    @apply bg-green-900 text-green-300 border-green-800;
+  }
+
+  .dark .mood-sad {
+    @apply bg-blue-900 text-blue-300 border-blue-800;
+  }
+
+  .dark .mood-neutral {
+    @apply bg-gray-900 text-gray-300 border-gray-800;
+  }
+
+  .dark .mood-excited {
+    @apply bg-orange-900 text-orange-300 border-orange-800;
+  }
+
+  .dark .mood-anxious {
+    @apply bg-purple-900 text-purple-300 border-purple-800;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-date {
+    @apply badge bg-neutral-300 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200;
+  }
+
+  .badge-section {
+    @apply badge bg-emerald-600/15 text-emerald-700 dark:text-emerald-300;
+  }
+
+  .badge-subtopic {
+    @apply badge bg-sky-600/15 text-sky-700 dark:text-sky-300;
+  }
+
+  .badge-mood {
+    @apply badge bg-rose-600/15 text-rose-700 dark:text-rose-300;
+  }
+
+  .badge-intensity {
+    @apply badge bg-amber-600/15 text-amber-700 dark:text-amber-300;
+  }
+}
+
+/* Плавные переходы */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Скролбар */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400;
+}
+
+.dark ::-webkit-scrollbar-track {
+  @apply bg-neutral-800;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-neutral-600;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-500;
+} 

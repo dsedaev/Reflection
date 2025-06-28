@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/reflection.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  passwordHash String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Section {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  description String?
+  order     Int      @unique
+  createdAt DateTime @default(now())
+  
+  subtopics Subtopic[]
+  entries   Entry[]
+  prompts   Prompt[]
+}
+
+model Subtopic {
+  id        Int      @id @default(autoincrement())
+  name      String
+  description String?
+  sectionId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  section   Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  entries   Entry[]
+  
+  @@unique([sectionId, name])
+}
+
+model Entry {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  content     String
+  mood        String?  // "happy", "sad", "neutral", "excited", "anxious", etc.
+  intensity   Int?     // 0-10
+  isDraft     Boolean  @default(false)
+  sectionId   Int
+  subtopicId  Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  section     Section  @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  subtopic    Subtopic? @relation(fields: [subtopicId], references: [id], onDelete: SetNull)
+  tags        EntryTag[]
+  answers     Answer[]
+  
+  // Связи между записями
+  relatedFrom RelatedEntry[] @relation("FromEntry")
+  relatedTo   RelatedEntry[] @relation("ToEntry")
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  color     String?  // hex color for tag
+  createdAt DateTime @default(now())
+  
+  entries   EntryTag[]
+}
+
+model EntryTag {
+  entryId Int
+  tagId   Int
+  
+  entry   Entry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  tag     Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  
+  @@id([entryId, tagId])
+}
+
+model Prompt {
+  id        Int      @id @default(autoincrement())
+  question  String
+  category  String?  // "reflection", "goals", "emotions", etc.
+  sectionId Int?     // optional связь с разделом
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  section   Section? @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  answers   Answer[]
+}
+
+model Answer {
+  id        Int      @id @default(autoincrement())
+  content   String
+  promptId  Int
+  entryId   Int?     // optional связь с записью
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  prompt    Prompt @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  entry     Entry? @relation(fields: [entryId], references: [id], onDelete: SetNull)
+}
+
+model RelatedEntry {
+  id         Int      @id @default(autoincrement())
+  fromEntryId Int
+  toEntryId   Int
+  relation   String   // "influence", "repeat", "development", "contrast"
+  createdAt  DateTime @default(now())
+  
+  fromEntry  Entry @relation("FromEntry", fields: [fromEntryId], references: [id], onDelete: Cascade)
+  toEntry    Entry @relation("ToEntry", fields: [toEntryId], references: [id], onDelete: Cascade)
+  
+  @@unique([fromEntryId, toEntryId])
+} 
